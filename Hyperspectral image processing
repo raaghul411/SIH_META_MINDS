@@ -1,21 +1,13 @@
-
-% Provide the full path to the Excel file if it’s not in the current working directory
-filename = 'AVIRIS Flight Lines.xlsx';  % Replace with the actual full path
-
-% Read the data from the Excel file
+filename = 'AVIRIS Flight Lines.xlsx';  
 data = readmatrix(filename);
 
-% Assuming the data has NDVI-related values in specific columns (replace as needed)
-band1 = data(:, 2);  % Replace with actual column index for Red/NIR band
-band2 = data(:, 3);  % Replace with actual column index for NIR band
+band1 = data(:, 2);  
+band2 = data(:, 3);  
 
-% Calculate NDVI or other indices for disaster prediction
 NDVI = (band2 - band1) ./ (band2 + band1);
 
-% Use NDVI or any spectral index as input to disaster prediction model
-probabilities = rand(1, 3) * 100;  % Example: Random probabilities for disaster predictions
+probabilities = rand(1, 3) * 100;  
 
-% Plot Disaster Probabilities
 figure;
 subplot(1, 2, 1);
 bar(probabilities, 'FaceColor', [0.2, 0.4, 0.6]);
@@ -24,9 +16,8 @@ title('Disaster Probabilities from Excel Data');
 ylabel('Probability (%)');
 ylim([0 100]);
 
-% Display the alert based on probabilities
 [max_prob, idx] = max(probabilities);
-disaster = {'Flood', 'Drought', 'Wildfire',idx};
+disaster = {'Flood', 'Drought', 'Wildfire', idx};
 if max_prob > 80
     disp(['Red Alert: High risk of ', disaster, '!']);
 elseif max_prob > 50
@@ -35,13 +26,11 @@ else
     disp(['Low risk of ', disaster, '.']);
 end
 
-% Sample RMSE, MAE, R-squared values for different models (example values)
 models = {'Your Model', 'Model A', 'Model B'};
 rmse = [0.15, 0.25, 0.35];
 mae = [0.12, 0.22, 0.30];
 r_squared = [0.92, 0.85, 0.78];
 
-% Plot Performance Metrics
 subplot(1, 2, 2);
 bar([rmse; mae; r_squared]', 'grouped');
 set(gca, 'XTickLabel', models);
@@ -50,5 +39,4 @@ title('Performance Metrics');
 ylabel('Metric Values');
 ylim([0 1]);
 
-% Show combined figures
 set(gcf, 'Position', [100, 100, 1200, 500]);
